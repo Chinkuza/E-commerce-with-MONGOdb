@@ -27,10 +27,9 @@ mongoose.connect(
     useCreateIndex: true,
     useUnifiedTopology: true
   },
-  err => {
-    if (err) return console.log(err || "connected to mongoDB");
-  }
+  err => console.log(err || "connected to mongodb")
 );
+
 // Creating live connection to reactjs app
 
 // routes require
@@ -48,15 +47,15 @@ app.get("/api", (req, res) => {
 app.use("/api/users", usersRoutes);
 
 // Define any API routes before this runs
-if (process.env.NODE_ENV === "production") {
-  app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  });
-} else {
-  app.get("*", function(req, res) {
-    res.send("currently serving fallback url, please check your path");
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/index.html"));
+});
+// } else {
+//   app.get("*", function(req, res) {
+//     res.send("currently serving fallback url, please check your path");
+//   });
+// }
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
